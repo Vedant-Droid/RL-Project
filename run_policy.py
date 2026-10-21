@@ -47,4 +47,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main()source /opt/ros/jazzy/setup.bash
+source ~/rl_venv/bin/activate
+python3 train_ppo.py --world default --timesteps 320 --no-sim-reset

@@ -45,7 +45,7 @@ def main():
             env,
             policy_kwargs=dict(net_arch=dict(pi=[128, 128], vf=[128, 128])),
             learning_rate=3e-4,
-            n_steps=1024,
+            n_steps=32,
             batch_size=64,
             n_epochs=10,
             gamma=0.99,

@@ -112,7 +112,7 @@ class TurtleBotGoalEnv(gym.Env):
         lidar_max: float = 3.5,
         max_linear: float = 0.22,      # m/s  (TurtleBot3 Burger limit)
         max_angular: float = 1.5,      # rad/s
-        step_dt: float = 0.1,          # seconds of (wall-clock) time per step
+        step_dt: float = 0.03,          # seconds of (wall-clock) time per step
         max_steps: int = 400,
         goal_min: float = 0.8,         # goal distance range from start (m)
         goal_max: float = 1.6,
@@ -216,8 +216,8 @@ class TurtleBotGoalEnv(gym.Env):
     def reset(self, *, seed=None, options=None):
         super().reset(seed=seed)
         self.ros.publish_cmd(0.0, 0.0)
-        if self.do_sim_reset:
-            self._reset_sim()
+
+        # Wait for fresh sensor messages without resetting Gazebo.
         self._wait_for_data(timeout=10.0, min_new=3)
 
         # Sample goal in the robot's start frame, then express it in the odom frame
